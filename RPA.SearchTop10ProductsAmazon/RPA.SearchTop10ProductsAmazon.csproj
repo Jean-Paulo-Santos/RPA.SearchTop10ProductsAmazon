@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-RPA.SearchTop10ProductsAmazon-76fea913-6577-4ad6-aa78-b814d0c4e327</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Config\**" />
+    <Content Remove="Config\**" />
+    <EmbeddedResource Remove="Config\**" />
+    <None Remove="Config\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Microsoft.AspNetCore.App" Version="8.0.0" />
+    <PackageReference Include="EPPlus" Version="7.4.1" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.67" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.8" />
+    <PackageReference Include="RestSharp" Version="112.1.0" />
+  </ItemGroup>
+</Project>
