@@ -19,7 +19,7 @@
     <PackageReference Include="EPPlus" Version="7.4.1" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.67" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.8" />
     <PackageReference Include="RestSharp" Version="112.1.0" />
   </ItemGroup>

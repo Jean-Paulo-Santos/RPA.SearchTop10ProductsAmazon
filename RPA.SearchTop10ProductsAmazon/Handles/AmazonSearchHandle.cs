@@ -1,4 +1,4 @@
-﻿using HtmlAgilityPack; // Adiciona o HtmlAgilityPack
+﻿using HtmlAgilityPack;
 using RestSharp;
 using RPA.SearchTop10ProductsAmazon.Models;
 using System.Collections.Generic;
@@ -16,13 +16,6 @@ namespace RPA.SearchTop10ProductsAmazon.Handles
         public AmazonSearchHandle(IConfiguration configuration)
         {
             _baseUrl = configuration["Amazon:BaseUrl"];
-
-            // Verifica se o valor da URL base não é nulo ou vazio
-            if (string.IsNullOrEmpty(_baseUrl))
-            {
-                throw new ArgumentNullException(nameof(_baseUrl), "A URL base da Amazon não pode ser nula ou vazia.");
-            }
-
             _client = new RestClient(_baseUrl);
         }
 
@@ -30,12 +23,6 @@ namespace RPA.SearchTop10ProductsAmazon.Handles
         public async Task<List<Produto>> SearchTop10Products(string searchTerm)
         {
             var produtos = new List<Produto>();
-
-            // Verifica se o termo de busca é válido
-            if (string.IsNullOrEmpty(searchTerm))
-            {
-                throw new ArgumentNullException(nameof(searchTerm), "O termo de busca não pode ser nulo ou vazio.");
-            }
 
             // Cria a requisição HTTP
             var request = new RestRequest("/s", Method.Get);
@@ -45,14 +32,14 @@ namespace RPA.SearchTop10ProductsAmazon.Handles
             var response = await _client.ExecuteAsync(request);
 
             // Verifica se a resposta foi bem sucedida
-            if (response.IsSuccessful && response.Content != null)
+            if (response.IsSuccessful)
             {
                 // Carrega o HTML da resposta na classe HtmlDocument
                 var htmlDoc = new HtmlDocument();
                 htmlDoc.LoadHtml(response.Content);
 
                 // Extrai os dados dos produtos do HTML (ajustar os seletores conforme a estrutura da página)
-                var productNodes = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 's-result-item')]");
+                var productNodes = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class,'sg-col-4-of-24 sg-col-4-of-12 s-result-item s-asin sg-col-4-of-16')]");
 
                 if (productNodes != null)
                 {
@@ -61,16 +48,20 @@ namespace RPA.SearchTop10ProductsAmazon.Handles
                     {
                         if (count >= 10) break;
 
-                        // Extrai o nome do produto
-                        var nomeNode = productNode.SelectSingleNode(".//span[contains(@class, 'a-size-medium')]");
+                        // Extrai o nome do produto 
+                        var nomeNode = productNode.SelectSingleNode(".//span[contains(@class,'a-size-base-plus a-color-base a-text-normal')]");
                         string nome = nomeNode?.InnerText.Trim() ?? "Nome não encontrado";
 
                         // Extrai o preço (ajuste conforme a estrutura HTML)
-                        var valorNode = productNode.SelectSingleNode(".//span[@class='a-offscreen']");
-                        decimal? valor = valorNode != null ? decimal.Parse(valorNode.InnerText.Replace("$", "")) : (decimal?)null;
+                        var valorNode = productNode.SelectSingleNode(".//span[@class='a-price-whole']");
+                        string valor = valorNode != null ? valorNode.InnerText.Trim() : "Preço não encontrado";
+
+
+                        var qtdNode = productNode.SelectSingleNode(".//span[@class='a-size-base a-color-secondary']");
+                        string qtdv = qtdNode?.InnerText.Trim() ?? "Informação não encontrada";
 
                         // Extrai o link do produto
-                        var linkNode = productNode.SelectSingleNode(".//a[@class='a-link-normal']");
+                        var linkNode = productNode.SelectSingleNode(".//a[@class='a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal']");
                         string url = linkNode != null ? _baseUrl + linkNode.GetAttributeValue("href", "") : "Link não encontrado";
 
                         // Adiciona o produto à lista
@@ -78,18 +69,13 @@ namespace RPA.SearchTop10ProductsAmazon.Handles
                         {
                             Nome = nome,
                             Valor = valor,
-                            QuantidadeVendida = null, // A quantidade vendida pode não estar disponível
-                            Url = url
+                            QuantidadeVendida = qtdv, 
+                            Url = url,
                         });
 
                         count++;
                     }
                 }
-            }
-            else
-            {
-                // Lida com a situação de uma resposta não bem-sucedida
-                throw new InvalidOperationException($"Falha na requisição de pesquisa da Amazon: {response.ErrorMessage}");
             }
 
             return produtos;
