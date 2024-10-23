@@ -1,11 +1,7 @@
 ﻿using HtmlAgilityPack;
 using RestSharp;
 using RPA.SearchTop10ProductsAmazon.Models;
-using System.Collections.Generic;
-using System.Linq; // Importante para a classificação
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-using System;
+
 
 namespace RPA.SearchTop10ProductsAmazon.Handles
 {
@@ -63,7 +59,6 @@ namespace RPA.SearchTop10ProductsAmazon.Handles
 
                         if (qtdv != null && qtdv.Contains("Mais de"))
                         {
-                            // A informação está correta, pois contém "Mais de"
                             // Extraímos o número da string, por exemplo: "Mais de 500 compras"
                             var quantidadeStr = qtdv.Split(' ')[2]; // Pega a quantidade (ex.: "500")
                             int.TryParse(quantidadeStr, out quantidadeVendida); // Converte para inteiro
@@ -85,7 +80,7 @@ namespace RPA.SearchTop10ProductsAmazon.Handles
                             Valor = valor,
                             QuantidadeVendida = qtdv,
                             Url = url,
-                            QuantidadeVendidaNumerica = quantidadeVendida // Adiciona a quantidade como número
+                            QuantidadeVendidaNumerica = quantidadeVendida 
                         });
                     }
                 }

@@ -1,7 +1,6 @@
 ﻿using OfficeOpenXml;
 using RPA.SearchTop10ProductsAmazon.Models;
-using System.Collections.Generic;
-using System.IO;
+
 
 namespace RPA.SearchTop10ProductsAmazon.Handles
 {

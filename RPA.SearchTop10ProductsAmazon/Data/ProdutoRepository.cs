@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using RPA.SearchTop10ProductsAmazon.Models;
+﻿using RPA.SearchTop10ProductsAmazon.Models;
 
 namespace RPA.SearchTop10ProductsAmazon.Data
 {

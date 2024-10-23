@@ -1,11 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection; // Necessário para criar escopos
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using RPA.SearchTop10ProductsAmazon.Handles;
+﻿using RPA.SearchTop10ProductsAmazon.Handles;
 using RPA.SearchTop10ProductsAmazon.Models;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using RPA.SearchTop10ProductsAmazon.Data;
 
 namespace RPA.SearchTop10ProductsAmazon.Workers
@@ -13,7 +7,7 @@ namespace RPA.SearchTop10ProductsAmazon.Workers
     public class SearchWorker : BackgroundService
     {
         private readonly IServiceScopeFactory _serviceScopeFactory;
-        private readonly string _outputFilePath = "Resultados.xlsx"; // Caminho do arquivo de saída
+        private readonly string _outputFilePath = "Resultados.xlsx"; 
 
         public SearchWorker(IServiceScopeFactory serviceScopeFactory)
         {
@@ -29,8 +23,9 @@ namespace RPA.SearchTop10ProductsAmazon.Workers
                 var excelHandle = scope.ServiceProvider.GetRequiredService<ExcelHandle>();
                 var produtoRepository = scope.ServiceProvider.GetRequiredService<ProdutoRepository>();
 
-                // Lê as palavras do arquivo Excel
-                var searchTerms = excelHandle.ReadSearchTerms("C:\\Users\\Cliente\\source\\repos\\RPA.SearchTop10ProductsAmazon\\ProductsForSearch.xlsx");
+                // Lê as palavras do arquivo Excel 
+                string _intputFilePath = Path.Combine(Directory.GetCurrentDirectory(), "RPA.SearchTop10ProductsAmazon", "ProductsForSearch.xlsx");
+                var searchTerms = excelHandle.ReadSearchTerms("_intputFilePath");
 
                 var produtosResultados = new List<Produto>();
 
@@ -38,7 +33,7 @@ namespace RPA.SearchTop10ProductsAmazon.Workers
                 {
                     // Para cada termo de busca, realiza a pesquisa na Amazon
                     var results = await amazonSearchHandle.SearchTop10Products(term);
-                    produtosResultados.AddRange(results);
+                    produtosResultados.AddRange(results);       
                 }
 
                 // Salvar os resultados no arquivo Excel
