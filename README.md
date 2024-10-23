@@ -1,8 +1,8 @@
 # 1.Projeto
-Projeto: C#, .NET 8, Worker Service.
-Nome: RPA Search Top 10 products Amazon
-Tipo: Rest Request.
-É uma automação que faz pesquisas de produtos na Amazon, extrai os 10 primeiros resultados de cada busca (incluindo nome, preço, e link do produto), e armazena essas informações em um banco de dados PostgreSQL. Ele utiliza o Worker Service do .NET para rodar em segundo plano e interage com APIs e arquivos Excel para obter as palavras-chave da pesquisa e salvar os dados.
+- Projeto: C#, .NET 8, Worker Service.
+- Nome: RPA.SearchTop10productsAmazon
+- Tipo: Rest Request.
+- É uma automação que faz pesquisas de produtos na Amazon, extrai os 10 primeiros resultados de cada busca (incluindo nome, preço, e link do produto), e armazena essas informações em um banco de dados PostgreSQL. Ele utiliza o Worker Service do .NET para rodar em segundo plano e interage com APIs e arquivos Excel para obter as palavras-chave da pesquisa e salvar os dados.
 
 # 2.Modelo de Entidade e Relacionamento (MER)
 Estrutura de tabelas para criação do banco de dados.
@@ -28,8 +28,8 @@ Criar o fluxo completo, previsto no escopo.
 Criar as classes de repositório, como leitura, criação, atualização dos dados no banco.
 Fazer a persistências dos dados no banco a cada item consultado pelo robô.
 
-## 5.Scopo
+## 5.Escopo
 ![image](https://github.com/user-attachments/assets/b31993f9-7a58-43e4-a2fa-a93f55c44be6)
 
-(miro) [https://miro.com/welcomeonboard/T21LSHpJbGRtV2FWUjdRUWFOZktCbWNmMEl4ZktseTZzMDFxU3dUWVBXSThQSE94dlpjRUNNUnAxYlRONDY3QnwzNDU4NzY0NjAzNDgzNzg4MTA5fDI=?share_link_id=668088493368]
+[Escopo] (https://miro.com/welcomeonboard/T21LSHpJbGRtV2FWUjdRUWFOZktCbWNmMEl4ZktseTZzMDFxU3dUWVBXSThQSE94dlpjRUNNUnAxYlRONDY3QnwzNDU4NzY0NjAzNDgzNzg4MTA5fDI=?share_link_id=668088493368)
 
