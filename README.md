@@ -7,7 +7,7 @@ Tipo: Rest Request.
 # 2.Modelo de Entidade e Relacionamento (MER)
 Estrutura de tabelas para criação do banco de dados.
 
-![MER'S.png](/.attachments/MER'S-8ac0d2ca-452a-4303-ad52-55232aef3230.png)
+![MER'S.png](https://github.com/user-attachments/assets/e50e75bf-29fd-49ef-8600-f284b1f6b05b)
 
 # 3.Arquitetura do projeto
 - **Worker.cs:** Classe principal para a execução do fluxo do robô.
@@ -27,3 +27,9 @@ Aqui está descrito o fluxo de desenvolvimento.
 Criar o fluxo completo, previsto no escopo.
 Criar as classes de repositório, como leitura, criação, atualização dos dados no banco.
 Fazer a persistências dos dados no banco a cada item consultado pelo robô.
+
+## 5.Scopo
+![image](https://github.com/user-attachments/assets/b31993f9-7a58-43e4-a2fa-a93f55c44be6)
+
+(miro) [https://miro.com/welcomeonboard/T21LSHpJbGRtV2FWUjdRUWFOZktCbWNmMEl4ZktseTZzMDFxU3dUWVBXSThQSE94dlpjRUNNUnAxYlRONDY3QnwzNDU4NzY0NjAzNDgzNzg4MTA5fDI=?share_link_id=668088493368]
+
